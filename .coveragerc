@@ -1,0 +1,5 @@
+[run]
+include = edi/*
+omit = *migrations*, *tests*
+plugins =
+    django_coverage_plugin

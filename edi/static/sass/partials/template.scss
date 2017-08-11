@@ -1,0 +1,14 @@
+* {
+  font: 16px $font1;
+  color: $extra-dark-grey;
+}
+
+html, body {
+  font-size: 16px !important;
+}
+
+#main {
+  //background: $extra-light-grey;
+  overflow-y: scroll;
+  height: calc(100vh - 5rem);
+}

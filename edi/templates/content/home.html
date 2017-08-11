@@ -1,0 +1,11 @@
+{% extends "react_base.html" %}
+{% load staticfiles i18n static %}
+{% load render_bundle from webpack_loader %}
+
+{% block javascript %}
+    {{ block.super }}
+    <script>
+        window.choices = {{ choices|safe }};
+    </script>
+    {% render_bundle 'edi' %}
+{% endblock %}

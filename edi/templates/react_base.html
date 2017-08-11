@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% load staticfiles i18n %}
+
+
+{% block css %}
+    {{ block.super }}
+     <link rel="stylesheet" href="https://unpkg.com/react-select/dist/react-select.css">
+     <link rel="stylesheet" href="https://unpkg.com/react-table@latest/react-table.css">
+</link>
+{% endblock %}
+
+{% block javascript %}
+    {{ block.super }}
+    <script>
+        window.content = {{ content|safe }};
+        window.links = {{ links|safe }};
+    </script>
+{% endblock %}
+
+{% block content %}
+    {% block prereact_content %}
+        {% if image %}
+            <div class="image-container" style="">
+                <img style="margin-top: -550px;min-width: 100%;" src="{{ image.image.url }}" alt="Kids">
+                <div class="after">
+                <div class="hero-text">{{ image.overlay_text }}</div>
+                </div>
+            </div>
+        {% endif %}
+    {% endblock %}
+    {% block react_content %}
+        <div class="container">
+            <div class="col-12">
+                <div style="width: 100%" id="root"></div>
+            </div>
+        </div>
+        <!-- /.container -->
+    {% endblock %}
+{% endblock %}

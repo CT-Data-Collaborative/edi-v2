@@ -1,0 +1,10 @@
+{% extends "react_base.html" %}
+{% load render_bundle from webpack_loader %}
+
+{% block javascript %}
+    {{ block.super }}
+    <script>
+        window.data = {{ data|safe }};
+    </script>
+    {% render_bundle 'visuals' %}
+{% endblock %}
