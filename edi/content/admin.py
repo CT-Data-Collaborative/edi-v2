@@ -35,6 +35,10 @@ class CityDataAdmin(SortableInlineAdminMixin, admin.StackedInline):
     model = JSONData
     extra = 0
 
+class CityGeoJSONAdmin(SortableInlineAdminMixin, admin.StackedInline):
+    model = JSONData
+    extra = 0
+
 class CityContentAdmin(SortableInlineAdminMixin, admin.StackedInline):
     model = CityContent
     extra = 0

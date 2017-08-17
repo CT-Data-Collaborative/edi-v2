@@ -76,5 +76,5 @@ staticfiles/
 
 .cache/
 
-edi/static/bundles/*.js
+edi/static/js/bundles/*.js
 .idea/

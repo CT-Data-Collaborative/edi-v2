@@ -1,10 +1,22 @@
 {% extends "react_base.html" %}
 {% load render_bundle from webpack_loader %}
 
+{% block css %}
+    {{ block.super}}
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css"
+    integrity="sha512-M2wvCLH6DSRazYeZRIm1JnYyh22purTM+FDB5CsyxtQJYeKq83arPe5wgbNmcFXGqiSH2XR8dT/fJISVA1r/zQ=="
+    crossorigin=""/>
+    <style>.leaflet-container {
+            height: 700px;
+            width: 100%;
+    }</style>
+{% endblock css %}
+
 {% block javascript %}
     {{ block.super }}
     <script>
         window.data = {{ data|safe }};
+        window.geojson = {{ geojson|safe}};
     </script>
     {% render_bundle 'visuals' %}
 {% endblock %}

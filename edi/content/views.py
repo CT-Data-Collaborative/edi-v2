@@ -72,6 +72,11 @@ def map_page(request, town_slug):
         city, context = city_context_helper(town_slug)
     except Http404 as e:
         raise e
-    json_data = city.jsondata_set.get().data
+
+    # This is a lousy antipattern. Would be better to break model form into two inlines.
+    json_data = city.jsondata_set.get(description='EDI').data
+    map_geojson = city.jsondata_set.get(description='Census').data
     context['data'] = json.dumps(json_data)
+    context['geojson'] = json.dumps(map_geojson)
+    context['content'] = json.dumps(None)
     return render(request, 'content/map.html', context)

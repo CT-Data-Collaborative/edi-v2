@@ -39,7 +39,7 @@ class StackedBarChart extends Component {
           <YAxis tickFormatter={toPercent}/>
           <Legend/>
           {columns.map((c) => {
-            return <Bar dataKey={c} stackId="a" fill={colorLookup[c]}/>
+            return <Bar maxBarSize={150} dataKey={c} stackId="a" fill={colorLookup[c]}/>
           })}
         </BarChart>
         </ResponsiveContainer>
