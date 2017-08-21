@@ -3,7 +3,7 @@
  */
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './edi/App';
+import App from './home/App';
 import 'whatwg-fetch';
 
 ReactDOM.render(<App />, document.getElementById('root'));

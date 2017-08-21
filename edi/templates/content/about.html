@@ -4,5 +4,8 @@
 
 {% block javascript %}
     {{ block.super }}
-    {% render_bundle 'edi' %}
+    <script>
+        window.city = "{{ city_name }}"; 
+    </script>
+    {% render_bundle 'about' %}
 {% endblock %}

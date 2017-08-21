@@ -31,7 +31,19 @@
     {% block react_content %}
         <div class="container">
             <div class="col-12">
+                {% if request.path != '/' %}
+                    <div><a href="/"><i class='fa fa-home'></i></a> > {{ page_name }}</div>
+                {% endif %}
                 <div style="width: 100%" id="root"></div>
+                {% if request.path != '/' %}
+                <div>
+                    <ul class="link-list">
+                    {% for link in links %}
+                        <li class="link-list__item link-list__item--button"><a class="link-list__link light-grey--text" href={{ link.link }}>{{ link.text }}</a></li>
+                    {% endfor %}
+                    </ul>
+                </div>
+                {% endif %}
             </div>
         </div>
         <!-- /.container -->

@@ -28,7 +28,8 @@ module.exports = {
   // entry: { , , scrape: './assets/js/scrape' },
   entry: {
         vendor: VENDOR,
-        edi: './src/js/edi',
+        home: './src/js/home',
+        about: './src/js/about',
         visuals: './src/js/visuals',
     },
 

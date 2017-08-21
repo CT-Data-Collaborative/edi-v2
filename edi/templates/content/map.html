@@ -16,6 +16,7 @@
     {{ block.super }}
     <script>
         window.data = {{ data|safe }};
+        window.city = "{{ city_name }}";
         window.geojson = {{ geojson|safe}};
     </script>
     {% render_bundle 'visuals' %}

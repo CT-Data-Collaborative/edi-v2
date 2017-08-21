@@ -37,7 +37,8 @@ class App extends Component {
     return (
        <div className="ctdata-edi-app">
          <MarkdownBlock content={content}/>
-         <h4>Learn about results in your community. To get started, select your town from the list below.</h4>
+         <h4>Learn about results in your community!</h4>
+         <h5>To get started, select your town from the list below.</h5>
          <Select
            name="city-select"
            value={selectedTown}

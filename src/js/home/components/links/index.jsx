@@ -15,9 +15,9 @@ class Links extends Component {
       return <div/>
     } else {
       return (
-        <ul>{baseLinks.map((l) => {
+        <ul className="link-list">{baseLinks.map((l) => {
             let link = l.link.replace('__placeholder__', this.props.selectedTown);
-            return <li><a href={link}>{l.text}</a></li>
+            return <li className="link-list__item link-list__item--button"><a className="link-list__link light-grey--text" href={link}>{l.text}</a></li>
         })}</ul>
       )
     }
