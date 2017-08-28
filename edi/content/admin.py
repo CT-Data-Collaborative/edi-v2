@@ -8,10 +8,10 @@ from .models import HomePage, HomePageContent, HomePageFiles, \
 
 
 # Set up for ensuring that Singleton Pages exists
-try:
-    home_page = HomePage.objects.get()
-except Exception:
-    home_page = HomePage().save()
+# try:
+#     home_page = HomePage.objects.get()
+# except Exception:
+#     home_page = HomePage().save()
 
 
 class ImagesAdmin(generic.GenericTabularInline):
@@ -25,7 +25,6 @@ class HomePageFileAdmin(SortableInlineAdminMixin, admin.StackedInline):
 class HomePageContentAdmin(SortableInlineAdminMixin, admin.StackedInline):
     model = HomePageContent
     extra = 0
-
 
 class HomePageAdmin(MarkdownxModelAdmin, SingletonModelAdmin):
     inlines = [HomePageContentAdmin, HomePageFileAdmin, ImagesAdmin]

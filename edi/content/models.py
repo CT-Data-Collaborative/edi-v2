@@ -75,6 +75,9 @@ class HomePageContent(SingletonPageContent):
 class HomePage(SingletonModel):
     images = GenericRelation(EDIImages)
 
+    def __str__(self):
+        return "Home Page"
+
 
 
 ########################################################################################################
