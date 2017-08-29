@@ -21,7 +21,7 @@ def home_page(request):
         'content': content_to_json(home_page_content.homepagecontent_set.all()),
         'links': [
             {'link': reverse('about', kwargs=URL_PLACEHOLDER), 'text': 'About EDI'},
-            {'link': reverse('map', kwargs=URL_PLACEHOLDER), 'text': 'EDI Data & Maps'},
+            {'link': reverse('map', kwargs=URL_PLACEHOLDER), 'text': 'EDI Maps & Charts'},
             {'link': reverse('analysis', kwargs=URL_PLACEHOLDER), 'text': 'EDI Data Analysis'}
         ],
         'image': image,
@@ -53,7 +53,7 @@ def about_page(request, town_slug):
         raise e
     context['content'] = content_to_json(city.citycontent_set.all())
     context['links'] = [
-            {'link': reverse('map', kwargs={'town_slug': town_slug}), 'text': 'EDI Data & Maps'},
+            {'link': reverse('map', kwargs={'town_slug': town_slug}), 'text': 'EDI Maps & Charts'},
             {'link': reverse('analysis', kwargs={'town_slug': town_slug}), 'text': 'EDI Data Analysis'}
         ]
     return render(request, 'content/about.html', context)
@@ -67,7 +67,7 @@ def analysis_page(request, town_slug):
     context['content'] = content_to_json(city.cityaction_set.all())
     context['links'] = [
             {'link': reverse('about', kwargs={'town_slug': town_slug}), 'text': 'About EDI'},
-            {'link': reverse('map', kwargs={'town_slug': town_slug}), 'text': 'EDI Data & Maps'},
+            {'link': reverse('map', kwargs={'town_slug': town_slug}), 'text': 'EDI Maps & Charts'},
         ]
     return render(request, 'content/analysis.html', context)
 

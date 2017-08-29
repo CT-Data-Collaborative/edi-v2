@@ -39,15 +39,17 @@ class App extends Component {
          <MarkdownBlock content={content}/>
          <h4>Learn about results in your community!</h4>
          <h5>To get started, select your town from the list below.</h5>
-         <Select
-           name="city-select"
-           value={selectedTown}
-           options={choices}
-           onChange={this.updateSelectedTown}
-         />
-         <Links links={this.state.links} selectedTown={selectedTown}/>
+         <div className="homepage-dropdown">
+           <Select
+             name="city-select"
+             value={selectedTown}
+             options={choices}
+             onChange={this.updateSelectedTown}
+           />
+          <Links links={this.state.links} selectedTown={selectedTown}/>
+          </div>
        </div>
-    )
+    );
   }
 }
 

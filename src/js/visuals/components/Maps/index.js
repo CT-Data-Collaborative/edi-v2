@@ -37,6 +37,10 @@ class EdiMap extends Component {
         this.onEachFeature = this.onEachFeature.bind(this);
     }
 
+    componentWillReceiveProps(oldProps, newProps) {
+        this.leafletMap.leafletElement.closePopup();
+    }
+
     style(feature) {
         return {
             fill: true,
@@ -55,7 +59,7 @@ class EdiMap extends Component {
             const tract = f.properties.NAMELSAD10;
             const fips = f.properties.GEOID10;
             const ediData = data.data[fips]; 
-            const popupLabel = tract + ' % Vulnerable, ' + label + ': ' + Math.round(ediData.percent * 100)/100 + '%';
+            const popupLabel = '<div style="font-weight:bold">Percent of children who score in lowest 10%</div><div>' + tract + '</div><div>' + label + ': ' + '<b>'+ Math.round(ediData.percent * 100)/100 + '%' + '</b></div>';
             f.properties['EDI'] = ediData;
             f.properties['label'] = popupLabel;
             return f;

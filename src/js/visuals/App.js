@@ -31,15 +31,15 @@ class App extends Component {
 
     return (
       <div>
-        <h1>Data and Maps for {this.state.city}</h1>
-        <EdiMap data={mapData}/>
-        <h3>Select a map data layer</h3>
+        <h1>Maps and Charts for {this.state.city}</h1>
+        <h3>Select Neighborhood EDI Results by Domain</h3>
         <Select
            name="map-data-select"
            value={selectedMapData}
            options={dropdownChoices}
            onChange={this.updateSelected}
          />
+        <EdiMap data={mapData}/>
         <StackedBarChart
           chartTitle="Who is considered vulnerable?"
           data={this.state.chartData.vulnerable.data}
