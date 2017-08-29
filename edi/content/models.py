@@ -63,6 +63,23 @@ class SingletonJSONData(models.Model):
 ########
 ########################################################################################################
 
+class Settings(SingletonModel):
+    breakpoints = ArrayField(models.IntegerField(), size=5)
+    map_colors = ArrayField(models.CharField(max_length=7), size=5)
+
+    def __str__(self):
+        return 'Application Settings'
+
+    class Meta:
+        verbose_name = 'Settings'
+        verbose_name_plural = 'Settings'
+
+########################################################################################################
+########
+######## Home Page and Subcontent Models
+########
+########################################################################################################
+
 
 class HomePageFiles(SingletonFiles):
     page = models.ForeignKey('HomePage', on_delete=models.CASCADE, null=True, blank=True)
@@ -115,3 +132,6 @@ class City(models.Model):
     def __str__(self):
         return self.name
 
+    class Meta:
+        verbose_name = 'City'
+        verbose_name_plural = 'Cities'

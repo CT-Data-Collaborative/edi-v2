@@ -4,7 +4,7 @@ from markdownx.admin import MarkdownxModelAdmin
 from adminsortable2.admin import SortableAdminMixin, SortableInlineAdminMixin
 from solo.admin import SingletonModelAdmin
 from .models import HomePage, HomePageContent, HomePageFiles, \
-    EDIImages, City, CityAction, CityContent, CityFiles, JSONData
+        EDIImages, City, CityAction, CityContent, CityFiles, JSONData, Settings
 
 
 # Set up for ensuring that Singleton Pages exists
@@ -12,7 +12,13 @@ from .models import HomePage, HomePageContent, HomePageFiles, \
 #     home_page = HomePage.objects.get()
 # except Exception:
 #     home_page = HomePage().save()
-
+try:
+    settings = Settings.objects.get()
+except Exception:
+    settings = Settings()
+    settings.breakpoints = [35,25,15,10,5]
+    settings.map_colors = ['#045a8d','#2b8cbe','#74a9cf','#bdc9e1','#f1eef6']
+    settings.save()
 
 class ImagesAdmin(generic.GenericTabularInline):
     model = EDIImages
@@ -51,3 +57,4 @@ class CityAdmin(MarkdownxModelAdmin):
 
 admin.site.register(HomePage, HomePageAdmin)
 admin.site.register(City, CityAdmin)
+admin.site.register(Settings)

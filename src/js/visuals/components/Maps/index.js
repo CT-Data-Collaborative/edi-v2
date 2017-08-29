@@ -27,7 +27,7 @@ class EdiMap extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            geojson: window.geojson,
+            geojson: JSON.parse(JSON.stringify(window.geojson)),
             label: props.data.label
         };
         const bounds = bbox(window.geojson);
@@ -41,7 +41,7 @@ class EdiMap extends Component {
     }
 
     componentWillReceiveProps(oldProps, newProps) {
-        this.leafletMap.leafletElement.closePopup();
+        this.refs.map.leafletElement.closePopup();
     }
 
     style(feature) {
@@ -115,7 +115,6 @@ class EdiMap extends Component {
         geojson.features = this.updateGeoJSON(geojson.features, this.props.data);
         return ( 
             <div>
-                <h2>Maps</h2>
                 <Map bounds={this.state.bounds} ref="map">
                 <TileLayer
                     url='https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}'

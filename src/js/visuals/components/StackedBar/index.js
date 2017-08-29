@@ -32,7 +32,9 @@ class StackedBarChart extends Component {
     const icon = this.state.open ? "fa fa-minus" : "fa fa-plus";
     return (
       <div>
+        <hr/>
         <h2>{this.props.chartTitle}</h2> 
+        <p>{this.props.intro}</p>
         <Button onClick={ ()=> this.setState({ open: !this.state.open })}><i className={icon}></i></Button> 
         { this.state.open == true &&
           <ResponsiveContainer
