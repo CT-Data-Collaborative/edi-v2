@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import centroid from 'turf-centroid';
+import bbox from 'turf-bbox';
 import { Map, Marker, Popup, TileLayer, GeoJSON } from 'react-leaflet';
 import Control from 'react-leaflet-control';
 
 const ChoroplethColors = [ '#045a8d', '#2b8cbe', '#74a9cf', '#bdc9e1', '#f1eef6' ];
-const Breakpoints = [ 25, 15, 10, 5, 0 ];
+// const Breakpoints = [ 30, 20, 15, 10, 0 ];
+const Breakpoints = window.breakpoints;
 
 function getColor(percent) {
     return percent > Breakpoints[0] ? ChoroplethColors[0] :
@@ -27,11 +28,13 @@ class EdiMap extends Component {
         super(props);
         this.state = {
             geojson: window.geojson,
-            center: centroid(window.geojson),
             label: props.data.label
         };
-        this.buildLegend = this.buildLegend.bind(this);
-        this.buildGeoJSON = this.buildGeoJSON.bind(this);
+        const bounds = bbox(window.geojson);
+        const corner1 = [bounds[1], bounds[0]];
+        const corner2 = [bounds[3], bounds[2]];
+        this.state.bounds = [corner1, corner2];
+        this.buildLegend = this.buildLegend.bind(this); 
         this.updateGeoJSON = this.updateGeoJSON.bind(this);
         this.zoomHome = this.zoomHome.bind(this);
         this.onEachFeature = this.onEachFeature.bind(this);
@@ -81,15 +84,9 @@ class EdiMap extends Component {
     }
 
     zoomHome() {
-        const center = [this.state.center.geometry.coordinates[1], this.state.center.geometry.coordinates[0]];
-        const leafletMap = this.leafletMap.leafletElement;
-        leafletMap.setView(center, 13);
-    }
-    
-    buildGeoJSON() {
-        const geojson = this.state.geojson; 
-        geojson.features = this.updateGeoJSON(geojson.features, this.props.data);
-        return (<GeoJSON data={geojson} style={this.style} onEachFeature={this.onEachFeature}/>);
+        const bounds = this.state.bounds;
+        const leafletMap = this.refs.map.leafletElement;
+        leafletMap.fitBounds(bounds); 
     }
 
     buildLegend() {
@@ -112,17 +109,19 @@ class EdiMap extends Component {
         );
     }
 
+
     render () {
-        const center = [this.state.center.geometry.coordinates[1], this.state.center.geometry.coordinates[0]];
+        const geojson = this.state.geojson; 
+        geojson.features = this.updateGeoJSON(geojson.features, this.props.data);
         return ( 
             <div>
                 <h2>Maps</h2>
-                <Map center={center} zoom={13} ref={m => { this.leafletMap = m; }}>
+                <Map bounds={this.state.bounds} ref="map">
                 <TileLayer
                     url='https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}'
                     attribution='Tiles &copy; Esri &mdash; Esri, DeLorme, NAVTEQ'
                     />
-                    {this.buildGeoJSON()}
+                    <GeoJSON ref="geojson" data={geojson} style={this.style} onEachFeature={this.onEachFeature}/>) 
                     {this.buildLegend()}
                     <Control position='topleft'>
                         <div className='leaflet-control-home leaflet-bar'>

@@ -41,6 +41,7 @@ def city_context_helper(town_slug, page_name):
     context = {
         'links': [],
         'image': image,
+        'breakpoints': city.breakpoints,
         'page_name': page_name,
         'city_name': city.name
     }

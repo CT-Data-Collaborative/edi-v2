@@ -18,6 +18,9 @@
         window.data = {{ data|safe }};
         window.city = "{{ city_name }}";
         window.geojson = {{ geojson|safe}};
+        {% if breakpoints %}
+            window.breakpoints = {{ breakpoints|safe}}
+        {% endif %}
     </script>
     {% render_bundle 'visuals' %}
 {% endblock %}

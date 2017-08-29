@@ -1,6 +1,6 @@
 from django.utils.text import slugify
 from django.db import models
-from django.contrib.postgres.fields import JSONField
+from django.contrib.postgres.fields import JSONField, ArrayField
 from django.contrib.contenttypes.fields import GenericRelation, GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
 from markdownx.models import MarkdownxField
@@ -106,6 +106,7 @@ class City(models.Model):
     name = models.CharField(max_length=255)
     slugged_name = models.SlugField(blank=True)
     images = GenericRelation(EDIImages)
+    breakpoints = ArrayField(models.IntegerField(), size=5)    
 
     def save(self, *args, **kwargs):
         self.slugged_name = slugify(self.name)
