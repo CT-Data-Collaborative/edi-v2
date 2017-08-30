@@ -68,8 +68,7 @@ class EdiMap extends Component {
         }
     }
 
-    style(feature) {
-        console.log(this)
+    style(feature) { 
         return {
             fill: true,
             fillColor: this.getColor(feature.properties.EDI.percent),
