@@ -8,17 +8,21 @@ from .models import HomePage, HomePageContent, HomePageFiles, \
 
 
 # Set up for ensuring that Singleton Pages exists
-# try:
-#     home_page = HomePage.objects.get()
-# except Exception:
-#     home_page = HomePage().save()
-# try:
-#     settings = Settings.objects.get()
-# except Exception:
-#     settings = Settings()
-#     settings.breakpoints = [35,25,15,10,5]
-#     settings.map_colors = ['#045a8d','#2b8cbe','#74a9cf','#bdc9e1','#f1eef6']
-#     settings.save()
+try:
+    home_page = HomePage.objects.get()
+except Exception:
+    home_page = HomePage().save()
+try:
+    settings = Settings.objects.get()
+except Exception:
+    settings = Settings()
+    settings.breakpoints = [35,25,15,10,5]
+    settings.map_colors = ['#045a8d','#2b8cbe','#74a9cf','#bdc9e1','#f1eef6']
+    settings.vulnerable_map_colors = ['#B30000','#E34A33','#FC8D59','#FDCC8A','#FEF0D9']
+    settings.vulnerable_and_not_ready_color = '#D7191C'
+    settings.at_risk_and_somewhat_ready_color = '#FFFFBF'
+    settings.on_track_and_ready_color = '#1A9641'
+    settings.save()
 
 class ImagesAdmin(generic.GenericTabularInline):
     model = EDIImages
