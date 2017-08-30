@@ -3,30 +3,11 @@ import bbox from 'turf-bbox';
 import { Map, Marker, Popup, TileLayer, GeoJSON } from 'react-leaflet';
 import Control from 'react-leaflet-control';
 
-const Breakpoints = window.breakpoints;
-const ChoroplethColors = window.domainColorScale;
-
-function getColor(percent) {
-    return percent > Breakpoints[0] ? ChoroplethColors[0] :
-        percent > Breakpoints[1] ? ChoroplethColors[1] :
-        percent > Breakpoints[2] ? ChoroplethColors[2] :
-        percent > Breakpoints[3] ? ChoroplethColors[3] :
-            ChoroplethColors[4];
-}
-
-function getLegendText(index) {
-    if (index == 0) {
-        return Breakpoints[index] + '% +';
-    } else {
-        return Breakpoints[index] + '% -' + Breakpoints[index-1] + '%';
-    }
-}
-
 class EdiMap extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            geojson: JSON.parse(JSON.stringify(window.geojson)),
+            geojson: JSON.parse(JSON.stringify(this.props.geojson)),
             label: props.data.label,
             colors: props.colors,
             breakpoints: window.breakpoints
@@ -115,6 +96,7 @@ class EdiMap extends Component {
 
     buildLegend() {
         let labels = [];
+        const Breakpoints = this.state.breakpoints;
         Breakpoints.forEach((b, index) => {
             const color = this.getColor(b+1);
             const text = this.getLegendText(index);

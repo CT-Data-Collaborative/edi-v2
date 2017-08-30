@@ -67,7 +67,7 @@ class App extends Component {
            options={dropdownChoices}
            onChange={this.updateSelected}
          /> 
-        <EdiMap data={mapData} colors={this.state.domainColors}/> 
+        <EdiMap geojson={window.geojson} data={mapData} colors={this.state.domainColors}/> 
         <hr/>
         <h5>View Neighborhoods Where Kids are Vulnerable</h5>
         <Select
@@ -76,7 +76,7 @@ class App extends Component {
            options={vulDropdownChoices}
            onChange={this.updateVulSelected}
          /> 
-        <EdiMap data={vulData} colors={this.state.vulColors}/> 
+        <EdiMap geojson={window.geojson} data={vulData} colors={this.state.vulColors}/> 
         <hr/>
         <h4 id="charts">Charts</h4>
         <StackedBarChart
