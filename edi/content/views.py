@@ -2,7 +2,7 @@ from django.http import Http404
 from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import render
 from django.core.urlresolvers import reverse
-from .models import HomePage, City #AboutPage, AnalysisPage, MapsPage,
+from .models import HomePage, City, Settings #AboutPage, AnalysisPage, MapsPage,
 import json
 
 URL_PLACEHOLDER = {'town_slug': '__placeholder__'}
@@ -86,9 +86,16 @@ def map_page(request, town_slug):
     # This is a lousy antipattern. Would be better to break model form into two inlines.
     json_data = city.jsondata_set.get(description='EDI').data
     map_geojson = city.jsondata_set.get(description='Census').data
+    settings = Settings.objects.get()
     context['data'] = json.dumps(json_data)
     context['geojson'] = json.dumps(map_geojson)
     context['content'] = json.dumps(None)
+    context['breakpoints'] = settings.breakpoints
+    context['domain_color_scale'] = settings.map_colors
+    context['vulnerable_color_scale'] = settings.vulnerable_map_colors
+    context['vul_color'] = settings.vulnerable_and_not_ready_color
+    context['atrisk_color'] = settings.at_risk_and_somewhat_ready_color
+    context['ontrack_color'] = settings.on_track_and_ready_color
     context['links'] = [
             {'link': reverse('about', kwargs={'town_slug': town_slug}), 'text': 'About EDI'},
             {'link': reverse('analysis', kwargs={'town_slug': town_slug}), 'text': 'EDI Data Analysis'}

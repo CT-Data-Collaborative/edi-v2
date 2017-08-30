@@ -21,6 +21,16 @@
         {% if breakpoints %}
             window.breakpoints = {{ breakpoints|safe}}
         {% endif %}
+        {% if domain_color_scale %}
+            window.domainColorScale = {{ domain_color_scale|safe}}
+        {% endif %}
+        {% if vulnerable_color_scale %}
+            window.vulnerableColorScale = {{ vulnerable_color_scale|safe}}
+        {% endif %}
+        {% if vulnerable_color_scale %}
+            window.vulnerableColorScale = {{ vulnerable_color_scale|safe}}
+        {% endif %}
+        window.chartColors = [ "{{vul_color}}", "{{atrisk_color}}", "{{ontrack_color}}" ];
     </script>
     {% render_bundle 'visuals' %}
 {% endblock %}

@@ -65,7 +65,11 @@ class SingletonJSONData(models.Model):
 
 class Settings(SingletonModel):
     breakpoints = ArrayField(models.IntegerField(), size=5)
-    map_colors = ArrayField(models.CharField(max_length=7), size=5)
+    map_colors = ArrayField(models.CharField(max_length=7), size=5, help_text='Enter five hex colors with leading #')
+    vulnerable_map_colors = ArrayField(models.CharField(max_length=7), size=5, help_text='Enter five hex colors with leading #')
+    vulnerable_and_not_ready_color = models.CharField(max_length=7, help_text='Enter the hex color for representing Vulnerable/Not Ready on the charts')
+    at_risk_and_somewhat_ready_color = models.CharField(max_length=7, help_text='Enter the hex color for representing At Risk/Somewhat Ready on the charts')
+    on_track_and_ready_color = models.CharField(max_length=7, help_text='Enter the hex color for representing On Track/Ready on the charts') 
 
     def __str__(self):
         return 'Application Settings'

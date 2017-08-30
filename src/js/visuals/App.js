@@ -11,6 +11,8 @@ class App extends Component {
       mapData: window.data.domain_map_data,
       vulData: window.data.vulnerable_map_data,
       chartData: window.data.chart_data,
+      domainColors: window.domainColorScale,
+      vulColors: window.vulnerableColorScale,
       selectedMapData: 'language',
       selectedVulMapData: 'vulnerable_one',
       city: window.city
@@ -47,9 +49,17 @@ class App extends Component {
     return (
       <div style={{paddingTop: '20px'}}>
         <h1>Visualize the results for {this.state.city}</h1> 
-        <p>The Early Development Instrument (EDI) looks at five domains. These domains cover the academic, social, physical, and emotional development children need to thrive and be ready for school.</p>
-        <h4>Maps</h4>
-        <p>The following maps display the results for each neighborhood (census tract). The first map displays the results by domains. Use the dropdown menu to change which domain is displayed. Click on a neighborhood to see the displayed values. The second map displays the results by the % of children vulnerable on one domain or vulnerable on one or more domains.</p>
+        <p>The Early Development Instrument (EDI) looks at five domains that cover the academic, social, physical, and emotional development children need to thrive and be ready for school:</p>
+        <ul>
+        	<li>Physical Health & Well-being</li>
+        	<li>Social Competence</li>
+        	<li>Emotional Maturity</li>
+        	<li>Language & Cognitive Development</li>
+        	<li>Communication Skills & General Knowledge</li>
+        </ul>
+        <p>Explore results in the following <a href="#maps">maps</a> and <a href="#charts">charts</a>.</p>
+        <h4 id="maps">Maps</h4>
+        <p>The following maps display the results for each neighborhood (census tract). The first map displays the results by domains. Use the dropdown menu to change which domain is displayed. Click on a neighborhood to see the displayed values. The second map displays the results by the % of children vulnerable on one domain or vulnerable on one or more domains. A student is considered vulnerable if their score is in the lowest 10th percentile of results.</p>
         <h5>Select Neighborhood EDI Results by Domain</h5>
         <Select
            name="map-data-select"
@@ -57,16 +67,18 @@ class App extends Component {
            options={dropdownChoices}
            onChange={this.updateSelected}
          /> 
-        <EdiMap data={mapData}/> 
+        <EdiMap data={mapData} colors={this.state.domainColors}/> 
         <hr/>
+        <h5>View Neighborhoods Where Kids are Vulnerable</h5>
         <Select
            name="vul-map-data-select"
            value={selectedVulMap}
            options={vulDropdownChoices}
            onChange={this.updateVulSelected}
          /> 
-        <EdiMap data={vulData}/> 
-        
+        <EdiMap data={vulData} colors={this.state.vulColors}/> 
+        <hr/>
+        <h4 id="charts">Charts</h4>
         <StackedBarChart
           chartTitle="Who is considered vulnerable?" 
           data={this.state.chartData.vulnerable.data}

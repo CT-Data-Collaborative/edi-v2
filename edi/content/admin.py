@@ -12,13 +12,13 @@ from .models import HomePage, HomePageContent, HomePageFiles, \
 #     home_page = HomePage.objects.get()
 # except Exception:
 #     home_page = HomePage().save()
-try:
-    settings = Settings.objects.get()
-except Exception:
-    settings = Settings()
-    settings.breakpoints = [35,25,15,10,5]
-    settings.map_colors = ['#045a8d','#2b8cbe','#74a9cf','#bdc9e1','#f1eef6']
-    settings.save()
+# try:
+#     settings = Settings.objects.get()
+# except Exception:
+#     settings = Settings()
+#     settings.breakpoints = [35,25,15,10,5]
+#     settings.map_colors = ['#045a8d','#2b8cbe','#74a9cf','#bdc9e1','#f1eef6']
+#     settings.save()
 
 class ImagesAdmin(generic.GenericTabularInline):
     model = EDIImages

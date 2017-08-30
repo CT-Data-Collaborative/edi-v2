@@ -3,9 +3,8 @@ import bbox from 'turf-bbox';
 import { Map, Marker, Popup, TileLayer, GeoJSON } from 'react-leaflet';
 import Control from 'react-leaflet-control';
 
-const ChoroplethColors = [ '#045a8d', '#2b8cbe', '#74a9cf', '#bdc9e1', '#f1eef6' ];
-// const Breakpoints = [ 30, 20, 15, 10, 0 ];
 const Breakpoints = window.breakpoints;
+const ChoroplethColors = window.domainColorScale;
 
 function getColor(percent) {
     return percent > Breakpoints[0] ? ChoroplethColors[0] :
@@ -28,7 +27,9 @@ class EdiMap extends Component {
         super(props);
         this.state = {
             geojson: JSON.parse(JSON.stringify(window.geojson)),
-            label: props.data.label
+            label: props.data.label,
+            colors: props.colors,
+            breakpoints: window.breakpoints
         };
         const bounds = bbox(window.geojson);
         const corner1 = [bounds[1], bounds[0]];
@@ -38,16 +39,40 @@ class EdiMap extends Component {
         this.updateGeoJSON = this.updateGeoJSON.bind(this);
         this.zoomHome = this.zoomHome.bind(this);
         this.onEachFeature = this.onEachFeature.bind(this);
+        this.getColor = this.getColor.bind(this);
+        this.style = this.style.bind(this);
+        this.getLegendText = this.getLegendText.bind(this);
     }
 
     componentWillReceiveProps(oldProps, newProps) {
         this.refs.map.leafletElement.closePopup();
     }
 
+
+    getColor(percent) {
+        const ChoroplethColors = this.state.colors;
+        const Breakpoints = this.state.breakpoints;
+        return percent > Breakpoints[0] ? ChoroplethColors[0] :
+            percent > Breakpoints[1] ? ChoroplethColors[1] :
+            percent > Breakpoints[2] ? ChoroplethColors[2] :
+            percent > Breakpoints[3] ? ChoroplethColors[3] :
+                ChoroplethColors[4];
+    }
+
+    getLegendText(index) {
+        const Breakpoints = this.state.breakpoints;
+        if (index == 0) {
+            return Breakpoints[index] + '% +';
+        } else {
+            return Breakpoints[index] + '% -' + Breakpoints[index-1] + '%';
+        }
+    }
+
     style(feature) {
+        console.log(this)
         return {
             fill: true,
-            fillColor: getColor(feature.properties.EDI.percent),
+            fillColor: this.getColor(feature.properties.EDI.percent),
             fillOpacity: .8,
             weight: 1,
             opacity: 1,
@@ -92,8 +117,8 @@ class EdiMap extends Component {
     buildLegend() {
         let labels = [];
         Breakpoints.forEach((b, index) => {
-            const color = getColor(b+1);
-            const text = getLegendText(index);
+            const color = this.getColor(b+1);
+            const text = this.getLegendText(index);
             labels.push(
             <div>
                 <span>

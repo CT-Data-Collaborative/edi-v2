@@ -10,7 +10,8 @@ class StackedBarChart extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      open : this.props.open
+      open : this.props.open,
+      colors : window.chartColors
     }
   }
 
@@ -18,8 +19,8 @@ class StackedBarChart extends Component {
 
     const columns = this.props.columns.map((c) => c.label);
     const colorLookup = {};
-    this.props.columns.forEach((c) => {
-      colorLookup[c.label] = c.color;
+    this.props.columns.forEach((c,i) => {
+      colorLookup[c.label] = this.state.colors[i]
     });
     const data = this.props.data.map((row) => {
       const newRow = {};
@@ -30,12 +31,13 @@ class StackedBarChart extends Component {
       return newRow
     });
     const icon = this.state.open ? "fa fa-minus" : "fa fa-plus";
+    const buttonText = this.state.open ? "Hide Chart" : "View Chart";
     return (
       <div>
         <hr/>
-        <h2>{this.props.chartTitle}</h2> 
+        <h5>{this.props.chartTitle}</h5> 
         <p>{this.props.intro}</p>
-        <Button onClick={ ()=> this.setState({ open: !this.state.open })}><i className={icon}></i></Button> 
+        <Button onClick={ ()=> this.setState({ open: !this.state.open })}><i className={icon}></i> { buttonText }</Button> 
         { this.state.open == true &&
           <ResponsiveContainer
             aspect={1.6}
