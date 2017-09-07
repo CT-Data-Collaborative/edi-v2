@@ -56,8 +56,12 @@ class CityActionAdmin(SortableInlineAdminMixin, admin.StackedInline):
     model = CityAction
     extra = 0
 
+class CityFilesAdmin(SortableInlineAdminMixin, admin.StackedInline):
+    model = CityFiles
+    extra = 0
+
 class CityAdmin(MarkdownxModelAdmin):
-    inlines = [CityContentAdmin, CityActionAdmin, CityDataAdmin]
+    inlines = [CityContentAdmin, CityActionAdmin, CityFilesAdmin, CityDataAdmin]
 
 admin.site.register(HomePage, HomePageAdmin)
 admin.site.register(City, CityAdmin)

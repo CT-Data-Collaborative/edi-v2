@@ -1,9 +1,12 @@
+import json
+import base64
+
 from django.http import Http404
 from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import render
 from django.core.urlresolvers import reverse
 from .models import HomePage, City, Settings #AboutPage, AnalysisPage, MapsPage,
-import json
+
 
 URL_PLACEHOLDER = {'town_slug': '__placeholder__'}
 
@@ -59,6 +62,9 @@ def about_page(request, town_slug):
         ]
     return render(request, 'content/about.html', context)
 
+def encode_pdf(pdf_obj):
+    lines = "".join([base64.b64encode(l).decode('utf-8', "ignore") for l in pdf_obj.readlines()])
+    return lines
 
 def analysis_page(request, town_slug):
     try:
@@ -66,6 +72,8 @@ def analysis_page(request, town_slug):
     except Http404 as e:
         raise e
     context['content'] = content_to_json(city.cityaction_set.all())
+    context['pdf'] = encode_pdf(city.cityfiles_set.get().upload.file)
+    context['pdf_file_path'] = city.cityfiles_set.get().upload.url
     context['links'] = [
             {'link': reverse('about', kwargs={'town_slug': town_slug}), 'text': 'About EDI'},
             {'link': reverse('map', kwargs={'town_slug': town_slug}), 'text': 'EDI Maps & Charts'},
@@ -101,3 +109,4 @@ def map_page(request, town_slug):
             {'link': reverse('analysis', kwargs={'town_slug': town_slug}), 'text': 'EDI Data Analysis'}
         ]
     return render(request, 'content/map.html', context)
+

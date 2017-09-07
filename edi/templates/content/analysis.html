@@ -3,5 +3,16 @@
 
 {% block javascript %}
     {{ block.super }}
-    {% render_bundle 'home' %}
+    <script>
+    window.pdfFilePath = "{{ pdf_file_path }}"
+    </script>
+    {% render_bundle 'analysis' %}
 {% endblock %}
+
+{#{% block  prereact_content %}#}
+{#    <object data="{{ pdf_file_path }}" type="application/pdf" width="750px" height="750px">#}
+{#    <embed src="{{ pdf_file_path }}" type="application/pdf">#}
+{#        <p>This browser does not support PDFs. Please download the PDF to view it: <a href="{{ pdf_file_path }}">Download PDF</a>.</p>#}
+{#    </embed>#}
+{#</object>#}
+{#{% endblock %}#}

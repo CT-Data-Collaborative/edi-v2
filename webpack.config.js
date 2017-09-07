@@ -30,6 +30,7 @@ module.exports = {
         vendor: VENDOR,
         home: './src/js/home',
         about: './src/js/about',
+        analysis: './src/js/analysis',
         visuals: './src/js/visuals',
     },
 

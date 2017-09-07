@@ -196,3 +196,12 @@ html, body {
 
 .Select {
   z-index: 1001; }
+
+.ctdata-edi-pdf-window {
+  border: 1px solid; }
+
+.ctdata-edi-pdf-navigation ul li {
+  display: inline;
+  list-style-type: none;
+  padding-left: 32px;
+  padding-left: 2rem; }
