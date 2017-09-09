@@ -59,9 +59,9 @@ class PDFViewer extends Component {
       pagination = this.renderPagination(this.state.page, this.state.pages);
     }
     return (
-      <div>
+      <div className="ctdata-edi-pdf-window">
         <object data={ this.state.file } type="application/pdf" width={this.props.width} height={this.props.height}>
-          <PDF className="ctdata-edi-pdf-window" file={this.state.file} onDocumentComplete={this.onDocumentComplete} onPageComplete={this.onPageComplete}
+          <PDF file={this.state.file} onDocumentComplete={this.onDocumentComplete} onPageComplete={this.onPageComplete}
                page={this.state.page}/>
           {pagination}
         </object>

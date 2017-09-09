@@ -15,11 +15,19 @@ class Links extends Component {
       return <div/>
     } else {
       return (
-        <ul className="link-list">{baseLinks.map((l) => {
-            let link = l.link.replace('__placeholder__', this.props.selectedTown);
-            return <li className="link-list__item link-list__item--button"><a className="link-list__link light-grey--text" href={link}>{l.text}</a></li>
-        })}</ul>
-      )
+        <div className="row links-row">{baseLinks.map((l) => {
+          let link = l.link.replace('__placeholder__', this.props.selectedTown);
+          return (
+            <div className="col-sm-4">
+            <div className="card text-center">
+              <div className="card-block">
+                <h4 className="card-title">{l.text}</h4>
+                <p className="card-text">{l.explainer}</p>
+                <a href={link} className="btn btn-primary">Explore</a>
+              </div>
+            </div>
+            </div>
+          )})}</div>);
     }
   }
 }

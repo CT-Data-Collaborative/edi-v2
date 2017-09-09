@@ -7,8 +7,16 @@ from django.shortcuts import render
 from django.core.urlresolvers import reverse
 from .models import HomePage, City, Settings #AboutPage, AnalysisPage, MapsPage,
 
+settings = Settings.objects.get()
+ABOUT_PAGE_EXPLAINER = settings.about_page_explainer
+ABOUT_PAGE_LINK_TITLE = settings.about_page_link_title
+DATA_PAGE_EXPLAINER = settings.data_page_explainer
+DATA_PAGE_LINK_TITLE = settings.data_age_link_title
+ANALYSIS_PAGE_EXPLAINER = settings.analysis_page_explainer
+ANALYSIS_PAGE_LINK_TITLE = settings.analysis_page_link_title
 
 URL_PLACEHOLDER = {'town_slug': '__placeholder__'}
+
 
 def content_to_json(content_set):
     return json.dumps([{'order': c.sort_order, 'content': c.content} for c in content_set])
@@ -23,9 +31,9 @@ def home_page(request):
     context = {
         'content': content_to_json(home_page_content.homepagecontent_set.all()),
         'links': [
-            {'link': reverse('about', kwargs=URL_PLACEHOLDER), 'text': 'About EDI'},
-            {'link': reverse('map', kwargs=URL_PLACEHOLDER), 'text': 'EDI Maps & Charts'},
-            {'link': reverse('analysis', kwargs=URL_PLACEHOLDER), 'text': 'EDI Data Analysis'}
+            {'link': reverse('about', kwargs=URL_PLACEHOLDER), 'text': ABOUT_PAGE_LINK_TITLE, 'explainer': ABOUT_PAGE_EXPLAINER},
+            {'link': reverse('map', kwargs=URL_PLACEHOLDER), 'text': DATA_PAGE_LINK_TITLE, 'explainer': DATA_PAGE_EXPLAINER},
+            {'link': reverse('analysis', kwargs=URL_PLACEHOLDER), 'text': ANALYSIS_PAGE_LINK_TITLE, 'explainer': ANALYSIS_PAGE_EXPLAINER}
         ],
         'image': image,
         'choices': json.dumps([{'name': d.name, 'slug': d.slugged_name} for d in data])
@@ -57,8 +65,10 @@ def about_page(request, town_slug):
         raise e
     context['content'] = content_to_json(city.citycontent_set.all())
     context['links'] = [
-            {'link': reverse('map', kwargs={'town_slug': town_slug}), 'text': 'EDI Maps & Charts'},
-            {'link': reverse('analysis', kwargs={'town_slug': town_slug}), 'text': 'EDI Data Analysis'}
+        {'link': reverse('map', kwargs={'town_slug': town_slug}), 'text': DATA_PAGE_LINK_TITLE,
+         'explainer': DATA_PAGE_EXPLAINER},
+        {'link': reverse('analysis', kwargs={'town_slug': town_slug}), 'text': ANALYSIS_PAGE_LINK_TITLE,
+         'explainer': ANALYSIS_PAGE_EXPLAINER}
         ]
     return render(request, 'content/about.html', context)
 
@@ -75,8 +85,10 @@ def analysis_page(request, town_slug):
     context['pdf'] = encode_pdf(city.cityfiles_set.get().upload.file)
     context['pdf_file_path'] = city.cityfiles_set.get().upload.url
     context['links'] = [
-            {'link': reverse('about', kwargs={'town_slug': town_slug}), 'text': 'About EDI'},
-            {'link': reverse('map', kwargs={'town_slug': town_slug}), 'text': 'EDI Maps & Charts'},
+        {'link': reverse('about', kwargs={'town_slug': town_slug}), 'text': ABOUT_PAGE_LINK_TITLE,
+         'explainer': ABOUT_PAGE_EXPLAINER},
+        {'link': reverse('map', kwargs={'town_slug': town_slug}), 'text': DATA_PAGE_LINK_TITLE,
+         'explainer': DATA_PAGE_EXPLAINER}
         ]
     return render(request, 'content/analysis.html', context)
 
@@ -105,8 +117,10 @@ def map_page(request, town_slug):
     context['atrisk_color'] = settings.at_risk_and_somewhat_ready_color
     context['ontrack_color'] = settings.on_track_and_ready_color
     context['links'] = [
-            {'link': reverse('about', kwargs={'town_slug': town_slug}), 'text': 'About EDI'},
-            {'link': reverse('analysis', kwargs={'town_slug': town_slug}), 'text': 'EDI Data Analysis'}
+        {'link': reverse('about', kwargs={'town_slug': town_slug}), 'text': ABOUT_PAGE_LINK_TITLE,
+         'explainer': ABOUT_PAGE_EXPLAINER},
+        {'link': reverse('analysis', kwargs={'town_slug': town_slug}), 'text': ANALYSIS_PAGE_LINK_TITLE,
+         'explainer': ANALYSIS_PAGE_EXPLAINER}
         ]
     return render(request, 'content/map.html', context)
 

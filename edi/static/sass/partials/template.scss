@@ -1,6 +1,9 @@
 * {
   font: 16px $font1;
   color: $extra-dark-grey;
+  h1,h2,h3,h4,h5 {
+    font-family: $font3;
+  }
 }
 
 html, body {

@@ -16,7 +16,7 @@ class EdiMap extends Component {
         const corner1 = [bounds[1], bounds[0]];
         const corner2 = [bounds[3], bounds[2]];
         this.state.bounds = [corner1, corner2];
-        this.buildLegend = this.buildLegend.bind(this); 
+        this.buildLegend = this.buildLegend.bind(this);
         this.updateGeoJSON = this.updateGeoJSON.bind(this);
         this.zoomHome = this.zoomHome.bind(this);
         this.onEachFeature = this.onEachFeature.bind(this);
@@ -49,24 +49,24 @@ class EdiMap extends Component {
         }
     }
 
-    style(feature) { 
+    style(feature) {
         return {
             fill: true,
             fillColor: this.getColor(feature.properties.EDI.percent),
             fillOpacity: .8,
-            weight: 1,
+            weight: 2,
             opacity: 1,
-            color: 'white',
+            color: '#E8E8E8',
         };
-       
-    } 
+
+    }
 
     updateGeoJSON(features, data) {
         const label = this.props.data.label;
         const newFeatures = features.map((f) => {
             const tract = f.properties.NAMELSAD10;
             const fips = f.properties.GEOID10;
-            const ediData = data.data[fips]; 
+            const ediData = data.data[fips];
             const popupLabel = '<div style="font-weight:bold">Percent of children who score in lowest 10%</div><div>' + tract + '</div><div>' + label + ': ' + '<b>'+ Math.round(ediData.percent * 100)/100 + '%' + '</b></div>';
             f.properties['EDI'] = ediData;
             f.properties['label'] = popupLabel;
@@ -76,9 +76,9 @@ class EdiMap extends Component {
     }
 
 
-    onEachFeature(feature, layer) { 
+    onEachFeature(feature, layer) {
         layer.on({
-            click: function(event) { 
+            click: function(event) {
                 const label = event.target.feature.properties.label;
                 const popup = L.popup()
                 .setLatLng(event.latlng)
@@ -91,7 +91,7 @@ class EdiMap extends Component {
     zoomHome() {
         const bounds = this.state.bounds;
         const leafletMap = this.refs.map.leafletElement;
-        leafletMap.fitBounds(bounds); 
+        leafletMap.fitBounds(bounds);
     }
 
     buildLegend() {
@@ -117,16 +117,16 @@ class EdiMap extends Component {
 
 
     render () {
-        const geojson = this.state.geojson; 
+        const geojson = this.state.geojson;
         geojson.features = this.updateGeoJSON(geojson.features, this.props.data);
-        return ( 
+        return (
             <div>
-                <Map bounds={this.state.bounds} ref="map">
+                <Map style={{width: "800px", height:"500px"}} bounds={this.state.bounds} ref="map">
                 <TileLayer
                     url='https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}'
                     attribution='Tiles &copy; Esri &mdash; Esri, DeLorme, NAVTEQ'
                     />
-                    <GeoJSON ref="geojson" data={geojson} style={this.style} onEachFeature={this.onEachFeature}/>) 
+                    <GeoJSON ref="geojson" data={geojson} style={this.style} onEachFeature={this.onEachFeature}/>)
                     {this.buildLegend()}
                     <Control position='topleft'>
                         <div className='leaflet-control-home leaflet-bar'>

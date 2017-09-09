@@ -2,10 +2,46 @@
 {% load staticfiles i18n static %}
 {% load render_bundle from webpack_loader %}
 
+{% block css %}
+    {{ block.super }}
+    <style>
+
+    p.icon {
+        text-align: center;
+    }
+    p.icon:before {
+        background-size: 110px 105px;
+        width: 110px;
+        height: 105px;
+        padding-left: 110px;
+        margin-left: 22px;
+        content: "";
+        display: block;
+    }
+    p.social:before {
+        background-image:url('{% static 'images/social.jpg' %}')
+    }
+    p.emotional:before {
+        background-image:url('{% static 'images/emotional.jpg' %}')
+    }
+    p.physical:before {
+        background-image:url('{% static 'images/physical.jpg' %}')
+    }
+    p.language:before {
+        background-image:url('{% static 'images/language.jpg' %}')
+    }
+    p.communication:before {
+        background-image:url('{% static 'images/communication.jpg' %}')
+    }
+    </style>
+
+{% endblock %}
 {% block javascript %}
     {{ block.super }}
     <script>
-        window.city = "{{ city_name }}"; 
+        window.city = "{{ city_name }}";
     </script>
     {% render_bundle 'about' %}
 {% endblock %}
+
+

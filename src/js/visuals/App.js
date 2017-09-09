@@ -34,7 +34,7 @@ class App extends Component {
     const dropdownChoices = choices.map((c) => {
       return { value: c, label: this.state.mapData[c].label }
     });
-    
+
     let vulChoices = Object.keys(this.state.vulData);
     const vulDropdownChoices = vulChoices.map((c) => {
       return { value: c, label: this.state.vulData[c].label }
@@ -42,13 +42,13 @@ class App extends Component {
 
     const selectedVulMap = this.state.selectedVulMapData;
     const vulData = this.state.vulData[selectedVulMap];
-    
+
     const selectedMapData = this.state.selectedMapData;
     const mapData = this.state.mapData[selectedMapData];
 
     return (
       <div style={{paddingTop: '20px'}}>
-        <h1>Visualize the results for {this.state.city}</h1> 
+        <h1>Visualize the results for {this.state.city}</h1>
         <p>The Early Development Instrument (EDI) looks at five domains that cover the academic, social, physical, and emotional development children need to thrive and be ready for school:</p>
         <ul>
         	<li>Physical Health & Well-being</li>
@@ -66,21 +66,23 @@ class App extends Component {
            value={selectedMapData}
            options={dropdownChoices}
            onChange={this.updateSelected}
-         /> 
-        <EdiMap geojson={window.geojson} data={mapData} colors={this.state.domainColors}/> 
-        <hr/>
+           style={{width: "800px"}}
+         />
+        <EdiMap geojson={window.geojson} data={mapData} colors={this.state.domainColors}/>
+        <hr style={{width: "800px", textAlign: "left", marginLeft: 0}}/>
         <h5>View Neighborhoods Where Kids are Vulnerable</h5>
         <Select
            name="vul-map-data-select"
            value={selectedVulMap}
            options={vulDropdownChoices}
            onChange={this.updateVulSelected}
-         /> 
-        <EdiMap geojson={window.geojson} data={vulData} colors={this.state.vulColors}/> 
+           style={{width: "800px"}}
+         />
+        <EdiMap geojson={window.geojson} data={vulData} colors={this.state.vulColors}/>
         <hr/>
         <h4 id="charts">Charts</h4>
         <StackedBarChart
-          chartTitle="Who is considered vulnerable?" 
+          chartTitle="Who is considered vulnerable?"
           data={this.state.chartData.vulnerable.data}
           columns={this.state.chartData.vulnerable.columns}
           open={true}

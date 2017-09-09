@@ -1,5 +1,6 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto+Condensed:300,400,700);
 @import url(https://fonts.googleapis.com/css?family=Roboto:400,500,700);
+@import url(https://fonts.googleapis.com/css?family=Montserrat:300,400,700|Trocchi:400,700);
 .alert-debug {
   background-color: #fff;
   border-color: #d6e9c6;
@@ -51,8 +52,10 @@
   color: #ececec; }
 
 * {
-  font: 16px "Roboto Condensed", sans-serif;
+  font: 16px "Montserrat", sans-serif;
   color: #4A4A4A; }
+  * h1, * h2, * h3, * h4, * h5 {
+    font-family: "Trocchi", serif; }
 
 html, body {
   font-size: 16px !important; }
@@ -84,7 +87,8 @@ html, body {
       color: #d2e4e7;
       text-decoration: none;
       font-size: 13.6px;
-      font-size: .85rem; }
+      font-size: .85rem;
+      font-family: "Roboto Condensed", sans-serif; }
     .ctdata-navbar ul.logo-list a:hover {
       color: #fff;
       text-decoration: none; }
@@ -116,6 +120,7 @@ html, body {
   color: white;
   width: 100%; }
   .footer .copyright p {
+    font-family: "Roboto Condensed", sans-serif;
     width: 100%;
     text-align: center;
     margin-left: auto;
@@ -198,7 +203,9 @@ html, body {
   z-index: 1001; }
 
 .ctdata-edi-pdf-window {
-  border: 1px solid; }
+  border: 1px solid;
+  margin-top: 32px;
+  margin-top: 2rem; }
 
 .ctdata-edi-pdf-navigation ul li {
   display: inline;

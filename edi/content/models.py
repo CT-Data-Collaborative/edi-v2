@@ -69,7 +69,13 @@ class Settings(SingletonModel):
     vulnerable_map_colors = ArrayField(models.CharField(max_length=7), size=5, help_text='Enter five hex colors with leading #')
     vulnerable_and_not_ready_color = models.CharField(max_length=7, help_text='Enter the hex color for representing Vulnerable/Not Ready on the charts')
     at_risk_and_somewhat_ready_color = models.CharField(max_length=7, help_text='Enter the hex color for representing At Risk/Somewhat Ready on the charts')
-    on_track_and_ready_color = models.CharField(max_length=7, help_text='Enter the hex color for representing On Track/Ready on the charts') 
+    on_track_and_ready_color = models.CharField(max_length=7, help_text='Enter the hex color for representing On Track/Ready on the charts')
+    data_age_link_title = models.CharField(max_length=255, default='')
+    data_page_explainer = models.CharField(max_length=255, default='')
+    about_page_link_title = models.CharField(max_length=255, default='')
+    about_page_explainer = models.CharField(max_length=255, default='')
+    analysis_page_link_title = models.CharField(max_length=255, default='')
+    analysis_page_explainer = models.CharField(max_length=255, default='')
 
     def __str__(self):
         return 'Application Settings'
@@ -127,7 +133,7 @@ class City(models.Model):
     name = models.CharField(max_length=255)
     slugged_name = models.SlugField(blank=True)
     images = GenericRelation(EDIImages)
-    breakpoints = ArrayField(models.IntegerField(), size=5)    
+    breakpoints = ArrayField(models.IntegerField(), size=5)
 
     def save(self, *args, **kwargs):
         self.slugged_name = slugify(self.name)

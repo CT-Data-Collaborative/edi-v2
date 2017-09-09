@@ -284,3 +284,9 @@ WEBPACK_LOADER = {
     }
 
 }
+
+
+# Markdown Settings
+MARKDOWNX_MARKDOWN_EXTENSIONS = [
+    'markdown.extensions.attr_list'
+]
