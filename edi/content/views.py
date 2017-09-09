@@ -5,7 +5,7 @@ from django.http import Http404
 from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import render
 from django.core.urlresolvers import reverse
-from .models import HomePage, City, Settings #AboutPage, AnalysisPage, MapsPage,
+from .models import HomePage, City, Settings
 
 settings = Settings.objects.get()
 ABOUT_PAGE_EXPLAINER = settings.about_page_explainer
@@ -16,7 +16,6 @@ ANALYSIS_PAGE_EXPLAINER = settings.analysis_page_explainer
 ANALYSIS_PAGE_LINK_TITLE = settings.analysis_page_link_title
 
 URL_PLACEHOLDER = {'town_slug': '__placeholder__'}
-
 
 def content_to_json(content_set):
     return json.dumps([{'order': c.sort_order, 'content': c.content} for c in content_set])
