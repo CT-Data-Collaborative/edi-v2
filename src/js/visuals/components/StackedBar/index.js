@@ -6,6 +6,10 @@ const toPercent = (decimal, fixed = 0) => {
 	return `${(decimal * 100).toFixed(fixed)}%`;
 };
 
+const valToPercent = (decimal) => {
+	return `${decimal.toFixed(1)}%`;
+};
+
 class StackedBarChart extends Component {
   constructor(props) {
     super(props)
@@ -35,9 +39,9 @@ class StackedBarChart extends Component {
     return (
       <div>
         <hr/>
-        <h5>{this.props.chartTitle}</h5> 
+        <h5>{this.props.chartTitle}</h5>
         <p>{this.props.intro}</p>
-        <Button onClick={ ()=> this.setState({ open: !this.state.open })}><i className={icon}></i> { buttonText }</Button> 
+        <Button onClick={ ()=> this.setState({ open: !this.state.open })}><i className={icon}></i> { buttonText }</Button>
         { this.state.open == true &&
           <ResponsiveContainer
             aspect={1.6}
@@ -46,7 +50,9 @@ class StackedBarChart extends Component {
           <BarChart
             data={data}
             stackOffset="expand"
+
           >
+            <Tooltip cursor={false} formatter={valToPercent}/>
             <XAxis dataKey={this.props.dataKey}/>
             <YAxis tickFormatter={toPercent}/>
             <Legend/>
