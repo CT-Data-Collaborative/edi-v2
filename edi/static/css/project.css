@@ -200,6 +200,10 @@ html, body {
   padding-top: 32px;
   padding-top: 2rem; }
 
+@media (max-width: 800px) {
+  .link-list__item--button {
+    display: block; } }
+
 .homepage-dropdown {
   padding-bottom: 100px; }
 

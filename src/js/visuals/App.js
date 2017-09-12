@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import StackedBarChart from './components/StackedBar';
 import EdiMap from './components/Maps';
 import Select from 'react-select';
-import Measure from 'react-measure';
 
 class App extends Component {
   constructor(props) {
-    super(props)
+    super(props);
+    const mainElement = document.getElementById('main');
     this.state = {
       mapData: window.data.domain_map_data,
       vulData: window.data.vulnerable_map_data,
@@ -15,7 +15,9 @@ class App extends Component {
       vulColors: window.vulnerableColorScale,
       selectedMapData: 'language',
       selectedVulMapData: 'vulnerable_one',
-      city: window.city
+      city: window.city,
+      height: mainElement.clientHeight,
+      width: mainElement.clientWidth
     }
     this.updateSelected = this.updateSelected.bind(this);
     this.updateVulSelected = this.updateVulSelected.bind(this);
@@ -46,6 +48,7 @@ class App extends Component {
     const selectedMapData = this.state.selectedMapData;
     const mapData = this.state.mapData[selectedMapData];
 
+    const mapWidth = this.state.width > 850 ? '800px' : this.state.width*.9 + 'px';
     return (
       <div style={{paddingTop: '20px'}}>
         <h1>Visualize the results for {this.state.city}</h1>
@@ -66,19 +69,19 @@ class App extends Component {
            value={selectedMapData}
            options={dropdownChoices}
            onChange={this.updateSelected}
-           style={{width: "800px"}}
+           style={{width: mapWidth}}
          />
-        <EdiMap geojson={window.geojson} data={mapData} colors={this.state.domainColors}/>
-        <hr style={{width: "800px", textAlign: "left", marginLeft: 0}}/>
+        <EdiMap geojson={window.geojson} data={mapData} colors={this.state.domainColors} width={mapWidth}/>
+        <hr style={{width: mapWidth, textAlign: "left", marginLeft: 0}}/>
         <h5>View Neighborhoods Where Kids are Vulnerable</h5>
         <Select
            name="vul-map-data-select"
            value={selectedVulMap}
            options={vulDropdownChoices}
            onChange={this.updateVulSelected}
-           style={{width: "800px"}}
+           style={{width: mapWidth}}
          />
-        <EdiMap geojson={window.geojson} data={vulData} colors={this.state.vulColors}/>
+        <EdiMap geojson={window.geojson} data={vulData} colors={this.state.vulColors} width={mapWidth}/>
         <hr/>
         <h4 id="charts">Charts</h4>
         <StackedBarChart
@@ -86,42 +89,54 @@ class App extends Component {
           data={this.state.chartData.vulnerable.data}
           columns={this.state.chartData.vulnerable.columns}
           open={true}
-          dataKey="geography"/>
+          dataKey="geography"
+          width={this.state.width}
+        />
         <StackedBarChart
           chartTitle={this.state.chartData.physical.label}
           intro={this.state.chartData.physical.intro}
           data={this.state.chartData.physical.components}
           columns={this.state.chartData.physical.columns}
           open={false}
-          dataKey="component"/>
+          dataKey="component"
+          width={this.state.width}
+        />
         <StackedBarChart
           chartTitle={this.state.chartData.emotional.label}
           intro={this.state.chartData.emotional.intro}
           data={this.state.chartData.emotional.components}
           columns={this.state.chartData.emotional.columns}
           open={false}
-          dataKey="component"/>
+          dataKey="component"
+          width={this.state.width}
+        />
         <StackedBarChart
           chartTitle={this.state.chartData.social.label}
           intro={this.state.chartData.social.intro}
           data={this.state.chartData.social.components}
           columns={this.state.chartData.social.columns}
           open={false}
-          dataKey="component"/>
+          dataKey="component"
+          width={this.state.width}
+        />
         <StackedBarChart
           chartTitle={this.state.chartData.language.label}
           intro={this.state.chartData.language.intro}
           data={this.state.chartData.language.components}
           columns={this.state.chartData.language.columns}
           open={false}
-          dataKey="component"/>
+          dataKey="component"
+          width={this.state.width}
+        />
         <StackedBarChart
           chartTitle={this.state.chartData.communication.label}
           intro={this.state.chartData.communication.intro}
           data={this.state.chartData.communication.components}
           columns={this.state.chartData.communication.columns}
           open={false}
-          dataKey="component"/>
+          dataKey="component"
+          width={this.state.width}
+        />
       </div>
     );
   }

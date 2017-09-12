@@ -35,3 +35,9 @@
 .links-row {
   padding-top: 2rem;
 }
+
+@media (max-width: 800px) {
+  .link-list__item--button {
+    display: block;
+  }
+}

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { BarChart, Bar, XAxis, YAxis, ResponsiveContainer, CartesianGrid, Tooltip, Legend } from 'recharts';
 import { Button, Panel } from 'react-bootstrap';
 
+
 const toPercent = (decimal, fixed = 0) => {
 	return `${(decimal * 100).toFixed(fixed)}%`;
 };
@@ -20,7 +21,21 @@ class StackedBarChart extends Component {
   }
 
   render () {
-
+    const maxBarWidth = this.props.width < 1100 ? 125: 75;
+    const marginLeft = this.props.width < 1100 ? 100 : 50;
+    let responsiveAspect = 1.6;
+    if (this.props.width < 500) {
+      responsiveAspect = 0.75;
+    } else if (this.props.width < 800) {
+      responsiveAspect = 1;
+    } else if (this.props.width < 1100) {
+      responsiveAspect = 1.25;
+    }
+    let responsiveWidth = '80%';
+    if (this.props.width < 800) {
+      responsiveWidth = '100%'
+    }
+    console.log(responsiveAspect);
     const columns = this.props.columns.map((c) => c.label);
     const colorLookup = {};
     this.props.columns.forEach((c,i) => {
@@ -44,20 +59,21 @@ class StackedBarChart extends Component {
         <Button onClick={ ()=> this.setState({ open: !this.state.open })}><i className={icon}></i> { buttonText }</Button>
         { this.state.open == true &&
           <ResponsiveContainer
-            aspect={1.6}
-            width="80%"
+            aspect={responsiveAspect}
+            width={responsiveWidth}
           >
           <BarChart
             data={data}
             stackOffset="expand"
-
+            layout="vertical"
+            margin={{ top: 20, right: 30, left: marginLeft, bottom: 20 }}
           >
             <Tooltip cursor={false} formatter={valToPercent}/>
-            <XAxis dataKey={this.props.dataKey}/>
-            <YAxis tickFormatter={toPercent}/>
+            <YAxis type="category" dataKey={this.props.dataKey}/>
+            <XAxis type="number" tickFormatter={toPercent}/>
             <Legend/>
             {columns.map((c) => {
-              return <Bar maxBarSize={150} dataKey={c} stackId="a" fill={colorLookup[c]}/>
+              return <Bar maxBarSize={maxBarWidth} dataKey={c} stackId="a" fill={colorLookup[c]}/>
             })}
           </BarChart>
           </ResponsiveContainer>

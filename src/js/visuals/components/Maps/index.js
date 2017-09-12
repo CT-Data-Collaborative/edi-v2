@@ -121,7 +121,7 @@ class EdiMap extends Component {
         geojson.features = this.updateGeoJSON(geojson.features, this.props.data);
         return (
             <div>
-                <Map style={{width: "800px", height:"500px"}} bounds={this.state.bounds} ref="map">
+                <Map style={{width: this.props.width, height:"500px"}} bounds={this.state.bounds} ref="map">
                 <TileLayer
                     url='https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}'
                     attribution='Tiles &copy; Esri &mdash; Esri, DeLorme, NAVTEQ'
