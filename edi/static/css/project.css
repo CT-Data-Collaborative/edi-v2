@@ -196,6 +196,10 @@ html, body {
   color: #4670A7;
   text-decoration: none; }
 
+.links-row {
+  padding-top: 32px;
+  padding-top: 2rem; }
+
 .homepage-dropdown {
   padding-bottom: 100px; }
 

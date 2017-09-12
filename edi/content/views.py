@@ -22,16 +22,16 @@ def build_links(about=False, map=False, analysis=False, town_slug=None):
         reverse_arg = {'town_slug': '__placeholder__'}
     if about:
         links.append({'link': reverse('about', kwargs=reverse_arg),
-                      'text': s.about_page_link_title,
-                      'explainer': s.about_page_explainer})
+                      'text': 'What is the EDI',
+                      'explainer': 'Find more on importance, implementation, and results.'})
     if map:
         links.append({'link': reverse('map', kwargs=reverse_arg),
-                      'text': s.data_age_link_title,
-                      'explainer': s.data_page_explainer})
+                      'text': 'EDI Maps & Charts',
+                      'explainer': 'Results mapped by neighborhood and interactive charts.'})
     if analysis:
         links.append({'link': reverse('analysis', kwargs=reverse_arg),
-                      'text': s.analysis_page_link_title,
-                      'explainer': s.analysis_page_explainer})
+                      'text': 'Community Results',
+                      'explainer': 'Access documents explaining community results in detail.'})
     return links
 
 def home_page(request):

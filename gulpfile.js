@@ -6,20 +6,14 @@
 // Plugins
 var gulp = require('gulp'),
       pjson = require('./package.json'),
-      gutil = require('gulp-util'),
       sass = require('gulp-sass'),
       autoprefixer = require('gulp-autoprefixer'),
       cssnano = require('gulp-cssnano'),
       rename = require('gulp-rename'),
-      del = require('del'),
       plumber = require('gulp-plumber'),
       pixrem = require('gulp-pixrem'),
-      uglify = require('gulp-uglify'),
       imagemin = require('gulp-imagemin'),
-      spawn = require('child_process').spawn,
-      runSequence = require('run-sequence'),
-      browserSync = require('browser-sync').create(),
-      reload = browserSync.reload;
+      runSequence = require('run-sequence');
 
 
 // Relative paths function
@@ -56,14 +50,6 @@ gulp.task('styles', function() {
     .pipe(gulp.dest(paths.css));
 });
 
-// Javascript minification
-// gulp.task('scripts', function() {
-//   return gulp.src(paths.js + '/project.js')
-//     .pipe(plumber()) // Checks for errors
-//     .pipe(uglify()) // Minifies the js
-//     .pipe(rename({ suffix: '.min' }))
-//     .pipe(gulp.dest(paths.js));
-// });
 
 // Image compression
 gulp.task('imgCompression', function(){
@@ -71,23 +57,6 @@ gulp.task('imgCompression', function(){
     .pipe(imagemin()) // Compresses PNG, JPEG, GIF and SVG images
     .pipe(gulp.dest(paths.images))
 });
-
-// // Run django server
-// gulp.task('runServer', function(cb) {
-//   var cmd = spawn('python', ['manage.py', 'runserver'], {stdio: 'inherit'});
-//   cmd.on('close', function(code) {
-//     console.log('runServer exited with code ' + code);
-//     cb(code);
-//   });
-// });
-
-// Browser sync server for live reload
-// gulp.task('browserSync', function() {
-//     browserSync.init(
-//       [paths.css + "/*.css", paths.js + "*.js", paths.templates + '*.html'], {
-//         proxy:  "localhost:8000"
-//     });
-// });
 
 // Watch
 gulp.task('watch', function() {
