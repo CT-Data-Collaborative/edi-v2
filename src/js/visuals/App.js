@@ -95,6 +95,7 @@ class App extends Component {
         <StackedBarChart
           chartTitle={this.state.chartData.physical.label}
           intro={this.state.chartData.physical.intro}
+          findings={this.state.chartData.physical.findings}
           data={this.state.chartData.physical.components}
           columns={this.state.chartData.physical.columns}
           open={false}
@@ -104,6 +105,7 @@ class App extends Component {
         <StackedBarChart
           chartTitle={this.state.chartData.emotional.label}
           intro={this.state.chartData.emotional.intro}
+          findings={this.state.chartData.emotional.findings}
           data={this.state.chartData.emotional.components}
           columns={this.state.chartData.emotional.columns}
           open={false}
@@ -113,6 +115,7 @@ class App extends Component {
         <StackedBarChart
           chartTitle={this.state.chartData.social.label}
           intro={this.state.chartData.social.intro}
+          findings={this.state.chartData.social.findings}
           data={this.state.chartData.social.components}
           columns={this.state.chartData.social.columns}
           open={false}
@@ -122,6 +125,7 @@ class App extends Component {
         <StackedBarChart
           chartTitle={this.state.chartData.language.label}
           intro={this.state.chartData.language.intro}
+          findings={this.state.chartData.language.findings}
           data={this.state.chartData.language.components}
           columns={this.state.chartData.language.columns}
           open={false}
@@ -131,6 +135,7 @@ class App extends Component {
         <StackedBarChart
           chartTitle={this.state.chartData.communication.label}
           intro={this.state.chartData.communication.intro}
+          findings={this.state.chartData.communication.findings}
           data={this.state.chartData.communication.components}
           columns={this.state.chartData.communication.columns}
           open={false}
