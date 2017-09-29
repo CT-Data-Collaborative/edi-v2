@@ -121,6 +121,10 @@ class CityAction(SingletonPageContent):
     page = models.ForeignKey('City', on_delete=models.CASCADE, null=True, blank=True)
 
 
+class CityResultsFiles(SingletonFiles):
+    page = models.ForeignKey('City', on_delete=models.CASCADE, null=True, blank=True)
+
+
 class CityFiles(SingletonFiles):
     page = models.ForeignKey('City', on_delete=models.CASCADE, null=True, blank=True)
 

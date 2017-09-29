@@ -4,7 +4,7 @@ from markdownx.admin import MarkdownxModelAdmin
 from adminsortable2.admin import SortableAdminMixin, SortableInlineAdminMixin
 from solo.admin import SingletonModelAdmin
 from .models import HomePage, HomePageContent, HomePageFiles, \
-        EDIImages, City, CityAction, CityContent, CityFiles, JSONData, Settings
+        EDIImages, City, CityAction, CityContent, CityResultsFiles, CityFiles, JSONData, Settings
 
 
 # Set up for ensuring that Singleton Pages exists
@@ -56,12 +56,20 @@ class CityActionAdmin(SortableInlineAdminMixin, admin.StackedInline):
     model = CityAction
     extra = 0
 
+class CityAboutPageFilesAdmin(SortableInlineAdminMixin, admin.StackedInline):
+    model = CityResultsFiles
+    extra = 0
+    verbose_name = "About Page File"
+    verbose_name_plural = "About Page File"
+
 class CityFilesAdmin(SortableInlineAdminMixin, admin.StackedInline):
     model = CityFiles
     extra = 0
+    verbose_name = "Powerpoint File"
+    verbose_name_plural = "Powerpoint File"
 
 class CityAdmin(MarkdownxModelAdmin):
-    inlines = [CityContentAdmin, CityActionAdmin, CityFilesAdmin, CityDataAdmin]
+    inlines = [CityContentAdmin, CityActionAdmin, CityFilesAdmin, CityAboutPageFilesAdmin, CityDataAdmin]
 
 admin.site.register(HomePage, HomePageAdmin)
 admin.site.register(City, CityAdmin)

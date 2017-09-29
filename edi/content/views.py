@@ -77,6 +77,7 @@ def about_page(request, town_slug):
         raise e
     context['content'] = content_to_json(city.citycontent_set.all())
     context['links'] = build_links(map=True, analysis=True, town_slug=town_slug)
+    context['file'] = city.cityresultsfiles_set.get().upload.url
     return render(request, 'content/about.html', context)
 
 
