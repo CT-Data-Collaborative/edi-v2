@@ -191,3 +191,18 @@ ADMIN_URL = env('DJANGO_ADMIN_URL')
 
 # Your production stuff: Below this line define 3rd party library settings
 # ------------------------------------------------------------------------------
+INSTALLED_APPS = (
+    # ...
+    'opbeat.contrib.django',
+)
+
+OPBEAT = {
+    'ORGANIZATION_ID': '0fc9a62bc4114c799dde798525c5f72c',
+    'APP_ID': '5170913bc3',
+    'SECRET_TOKEN': 'dcf21445dda0ef9628aac192527e663eb706cbfd',
+}
+
+MIDDLEWARE_CLASSES = (
+    'opbeat.contrib.django.middleware.OpbeatAPMMiddleware',
+    # ...
+)
