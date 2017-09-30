@@ -78,3 +78,4 @@ staticfiles/
 
 edi/static/js/bundles/*.js
 .idea/
+backups/
