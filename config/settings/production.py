@@ -191,10 +191,7 @@ ADMIN_URL = env('DJANGO_ADMIN_URL')
 
 # Your production stuff: Below this line define 3rd party library settings
 # ------------------------------------------------------------------------------
-INSTALLED_APPS = (
-    # ...
-    'opbeat.contrib.django',
-)
+INSTALLED_APPS += ['opbeat.contrib.django',]
 
 OPBEAT = {
     'ORGANIZATION_ID': '0fc9a62bc4114c799dde798525c5f72c',
