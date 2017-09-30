@@ -199,7 +199,4 @@ OPBEAT = {
     'SECRET_TOKEN': 'dcf21445dda0ef9628aac192527e663eb706cbfd',
 }
 
-MIDDLEWARE_CLASSES = (
-    'opbeat.contrib.django.middleware.OpbeatAPMMiddleware',
-    # ...
-)
+MIDDLEWARE  += ['opbeat.contrib.django.middleware.OpbeatAPMMiddleware',]
