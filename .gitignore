@@ -76,6 +76,6 @@ staticfiles/
 
 .cache/
 
-edi/static/js/bundles/*.js
+# edi/static/js/bundles/*.js
 .idea/
 backups/
