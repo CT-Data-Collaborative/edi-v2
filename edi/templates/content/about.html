@@ -33,6 +33,18 @@
     p.communication:before {
         background-image:url('{% static 'images/communication.jpg' %}')
     }
+    span.results-link > a {
+        color: black;
+        font-size: 1.5rem;
+        font-family: "Montserrat";
+    }
+    span.results-link:hover > a {
+        color: #4871A5;
+        text-decoration: none;
+    }
+    span.results-link:hover > a > i {
+        color: #4871A5;
+    }
     </style>
 
 {% endblock %}
@@ -45,6 +57,8 @@
     {{ block.super }}
     <script>
         window.city = "{{ city_name }}";
+        window.results = "{{ file }}";
+        window.results_description = "{{ file_description }}"
     </script>
     {% render_bundle 'about' %}
 {% endblock %}

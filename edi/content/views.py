@@ -83,6 +83,7 @@ def about_page(request, town_slug):
         pdf = None
     if pdf:
         context['file'] = pdf.upload.url
+        context['file_description'] = pdf.description
     return render(request, 'content/about.html', context)
 
 

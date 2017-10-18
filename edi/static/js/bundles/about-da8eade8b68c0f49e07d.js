@@ -1335,16 +1335,32 @@ class App extends __WEBPACK_IMPORTED_MODULE_0_react__["Component"] {
     constructor(props) {
         super(props);
         this.state = {
-            content: window.content
+            content: window.content,
+            results: window.results,
+            results_description: window.results_description
         };
     }
 
     render() {
         const content = this.state.content;
+        const results = this.state.results;
+        const results_description = this.state.results_description;
         return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
             'div',
             { className: 'ctdata-edi-app' },
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__home_components_markdown_block__["a" /* default */], { content: content })
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__home_components_markdown_block__["a" /* default */], { content: content }),
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                'span',
+                { className: 'results-link' },
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    'a',
+                    { href: results },
+                    ' ',
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'fa fa-file-text' }),
+                    ' ',
+                    results_description
+                )
+            )
         );
     }
 
