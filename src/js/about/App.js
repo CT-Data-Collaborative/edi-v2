@@ -11,14 +11,21 @@ class App extends Component {
           };
     }
 
+    resultsLink() {
+      const results = this.state.results;
+      const results_description = this.state.results_description;
+      if (results != '') {
+        return <span className="results-link"><a href={results}> <i className="fa fa-file-text"></i> {results_description}</a></span>
+      } else {
+        return <span/>
+      }
+    }
     render() {
-        const content = this.state.content;
-        const results = this.state.results;
         const results_description = this.state.results_description;
         return (
            <div className="ctdata-edi-app">
              <MarkdownBlock content={content}/>
-             <span className="results-link"><a href={results}> <i className="fa fa-file-text"></i> {results_description}</a></span>
+             {this.resultsLink()}
            </div>
         )
       }
